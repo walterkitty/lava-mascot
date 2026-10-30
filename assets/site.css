@@ -161,3 +161,19 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
 }
 [data-body="hidden"] .grid .tile, [data-ground="dark"] .grid .tile { background: var(--card); }
 [data-body="hidden"] .phone-mascot::before { content: none; }
+
+.icon-box {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 24%;
+  overflow: hidden;
+  background: linear-gradient(150deg, #f2a231 0%, #fbda49 55%, #fff9f1 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35), 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+.icon-box > * { flex: none; transform: translateY(15%); }
+nav.pages { overflow-x: auto; scrollbar-width: none; max-width: calc(100vw - 150px); }
+nav.pages::-webkit-scrollbar { display: none; }
+@media (max-width: 480px) {
+  nav.pages { max-width: calc(100vw - 32px); }
+}
