@@ -124,29 +124,39 @@ h2 {
   overflow: hidden;
   cursor: pointer;
 }
-.tile.wide { aspect-ratio: 16 / 9; margin-top: 56px; cursor: default; }
+.tile.wide { aspect-ratio: 16 / 9; margin-top: 56px; cursor: default; place-items: start center; padding-top: 5%; }
 .phone {
   position: relative;
-  height: 88%;
+  width: min(42%, 440px);
   aspect-ratio: 390 / 844;
   border-radius: 9% / 4.2%;
   border: 6px solid #0d0d0d;
   overflow: hidden;
   background: var(--background);
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  flex: none;
 }
 .phone img { display: block; width: 100%; height: 100%; }
 .phone-mascot {
   position: absolute;
   left: 50%;
-  top: 26.3%;
-  width: 26%;
+  top: 22.5%;
+  width: 34%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   display: grid;
   place-items: center;
   cursor: pointer;
 }
+.phone-mascot::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  border-radius: 50%;
+  background: var(--secondary);
+  pointer-events: none;
+}
+.phone-mascot > * { position: relative; }
 .grid { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
 figcaption { display: flex; flex-direction: column; gap: 2px; }
@@ -205,7 +215,8 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
   section { padding: 64px 0; }
   .top { padding-top: 40px; }
   .top-head { grid-template-columns: 1fr; gap: 16px; }
-  .tile.wide { aspect-ratio: 4 / 5; margin-top: 32px; }
+  .tile.wide { aspect-ratio: 4 / 5; margin-top: 32px; padding-top: 8%; }
+  .phone { width: 74%; }
 }
 @media (max-width: 640px) {
   .grid { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
@@ -290,7 +301,7 @@ try { if (localStorage.getItem('shading') === 'flat') shading = 'flat'; } catch 
 function render() {
   for (const { el, root } of mounts) {
     const box = el.getBoundingClientRect();
-    const size = Math.round(Math.min(box.width, box.height) * (el.dataset.mascot === 'phone' ? 1 : 0.72));
+    const size = Math.round(Math.min(box.width, box.height) * (el.dataset.mascot === 'phone' ? 1.3 : 0.72));
     root.render(h(Assistant, {
       size,
       state: el.dataset.state || 'default',
