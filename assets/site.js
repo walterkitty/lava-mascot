@@ -2,7 +2,7 @@ const kit = document.body.dataset.kit || 'Assistant';
 const Mascot = window.LavaMascot[kit];
 const tunings = {
   lava: { round: 20.5, pupil: 1.05, eyeSize: 1.2, brows: 'hidden' },
-  drop: { type: 'drop', eyes: 'cartoon', color: '#ffc23a', gradient: ['#F2A231', '#FBDA49', '#FFF9F1'], solid: 'plastic' },
+  drop: { type: 'drop', eyes: 'cartoon', color: '#ffc23a', gradient: ['#F2A231', '#FBDA49', '#FFF9F1'], finish: 'frosted', solid: 'smooth' },
 };
 const { solid = 'fabric', ...tuned } = tunings[document.body.dataset.page] || {};
 const h = React.createElement;
