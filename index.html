@@ -48,6 +48,25 @@ section {
   color: var(--muted);
 }
 .mascot { display: grid; place-items: center; cursor: pointer; }
+h2 {
+  margin: 0 0 48px;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+.states {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(16px, 4vw, 48px);
+  width: 100%;
+  max-width: 960px;
+}
+.state { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.state b { font-size: 18px; font-weight: 700; }
+@media (max-width: 640px) {
+  .states { grid-template-columns: 1fr; gap: 40px; }
+}
 </style>
 </head>
 <body>
@@ -57,6 +76,14 @@ section {
     <h1>Маскот<br>ассистента</h1>
     <p>Чёрный плюш, уши наружу. Глаза: веко, светящаяся радужка, зрачок под веком.</p>
   </section>
+  <section id="states">
+    <h2>Состояния</h2>
+    <div class="states">
+      <div class="state"><div class="mascot" data-mascot="state" data-state="default"></div><b>Покой</b></div>
+      <div class="state"><div class="mascot" data-mascot="state" data-state="working"></div><b>Работа</b></div>
+      <div class="state"><div class="mascot" data-mascot="state" data-state="sleeping"></div><b>Сон</b></div>
+    </div>
+  </section>
 </main>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -65,17 +92,25 @@ section {
 const { Assistant } = window.LavaMascot;
 const h = React.createElement;
 
-function heroSize() {
-  return Math.round(Math.min(360, window.innerWidth * 0.72));
-}
+const sizes = {
+  hero: () => Math.min(360, window.innerWidth * 0.72),
+  state: () => window.innerWidth <= 640 ? Math.min(240, window.innerWidth * 0.6) : Math.min(240, window.innerWidth * 0.24),
+};
 
-const heroRoot = ReactDOM.createRoot(document.querySelector('[data-mascot="hero"]'));
-function renderHero() {
-  const size = heroSize();
-  heroRoot.render(h(Assistant, { size, theme: 'light', resolution: 3, style: { width: size, height: size } }));
+const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({
+  el,
+  root: ReactDOM.createRoot(el),
+}));
+
+function render() {
+  for (const { el, root } of mounts) {
+    const size = Math.round(sizes[el.dataset.mascot]());
+    const state = el.dataset.state || 'default';
+    root.render(h(Assistant, { size, state, theme: 'light', resolution: 3, style: { width: size, height: size } }));
+  }
 }
-renderHero();
-window.addEventListener('resize', renderHero);
+render();
+window.addEventListener('resize', render);
 </script>
 </body>
 </html>
