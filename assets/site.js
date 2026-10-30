@@ -37,7 +37,7 @@ function render() {
       style: { width: size, height: size },
     };
     if (phoneBox && el.dataset.mascot === 'phone') {
-      const outer = Math.round(size * 0.78), inner = Math.round(outer * 0.72);
+      const outer = Math.round(size * 0.6), inner = Math.round(outer * 1.25);
       root.render(h('div', { className: 'icon-box ember', style: { width: outer, height: outer } }, h(Mascot, { ...props, size: inner, style: { width: inner, height: inner } })));
       continue;
     }
