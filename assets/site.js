@@ -37,8 +37,8 @@ function render() {
       style: { width: size, height: size },
     };
     if (phoneBox && el.dataset.mascot === 'phone') {
-      const outer = Math.round(size * 0.78), inner = Math.round(outer * 0.62);
-      root.render(h('div', { className: 'icon-box tri', style: { width: outer, height: outer } }, h(Mascot, { ...props, size: inner, style: { width: inner, height: inner } })));
+      const s = Math.round(size * 1.15);
+      root.render(h(Mascot, { ...props, path: 'M63.97 16.91L92.07 67.31A16 16 0 0 1 78.1 91.1L21.9 91.1A16 16 0 0 1 7.93 67.31L36.03 16.91A16 16 0 0 1 63.97 16.91Z', color: '#f04a14', ink: '#131317', saturation: 1.6, brightness: 1, faceY: 64, faceScale: 0.9, size: s, style: { width: s, height: s } }));
       continue;
     }
     root.render(boxed

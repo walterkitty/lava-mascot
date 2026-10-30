@@ -213,11 +213,3 @@ nav.pages.more-left.more-right { -webkit-mask-image: linear-gradient(90deg, tran
   .next-link { flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; }
 }
 
-.icon-box.tri {
-  border-radius: 0;
-  background: linear-gradient(160deg, #ff6a2a, #e8420f);
-  box-shadow: none;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M63.97 16.91L92.07 67.31A16 16 0 0 1 78.1 91.1L21.9 91.1A16 16 0 0 1 7.93 67.31L36.03 16.91A16 16 0 0 1 63.97 16.91Z'/></svg>") center / 100% 100% no-repeat;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M63.97 16.91L92.07 67.31A16 16 0 0 1 78.1 91.1L21.9 91.1A16 16 0 0 1 7.93 67.31L36.03 16.91A16 16 0 0 1 63.97 16.91Z'/></svg>") center / 100% 100% no-repeat;
-  padding-top: 18%;
-}
