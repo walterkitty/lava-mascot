@@ -63,7 +63,6 @@ function setFlat(next) {
   flat = next;
   shading = flat ? 'flat' : 'fabric';
   for (const b of modes) b.setAttribute('aria-pressed', String(b.dataset.d === (flat ? '2d' : '3d')));
-  for (const a of pageLinks) a.search = flat ? '?2d' : '';
   history.replaceState(null, '', (flat ? '?2d' : location.pathname) + location.hash);
   render();
 }
