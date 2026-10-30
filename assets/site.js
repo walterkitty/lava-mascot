@@ -3,8 +3,8 @@ const h = React.createElement;
 
 const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({ el, root: ReactDOM.createRoot(el) }));
 
-let shading = 'fabric';
-try { if (localStorage.getItem('shading') === 'flat') shading = 'flat'; } catch {}
+const flat = new URLSearchParams(location.search).has('2d');
+const shading = flat ? 'flat' : 'fabric';
 
 function render() {
   for (const { el, root } of mounts) {
@@ -24,15 +24,7 @@ function render() {
   }
 }
 
-const switches = [...document.querySelectorAll('[data-shading]')];
-function setShading(next) {
-  shading = next;
-  for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.shading === shading));
-  try { localStorage.setItem('shading', shading); } catch {}
-  render();
-}
-for (const b of switches) b.addEventListener('click', () => setShading(b.dataset.shading));
-setShading(shading);
+render();
 new ResizeObserver(render).observe(document.querySelector('main'));
 
 const side = document.querySelector('.side');
@@ -54,5 +46,13 @@ const spy = new IntersectionObserver((entries) => {
 for (const s of document.querySelectorAll('main section')) spy.observe(s);
 
 for (const a of document.querySelectorAll('.pages a')) {
-  if (a.dataset.page === document.body.dataset.page) a.setAttribute('aria-current', 'page');
+  if (a.dataset.page === document.body.dataset.page && a.dataset.d === (flat ? '2d' : '3d')) a.setAttribute('aria-current', 'page');
+}
+
+const sections = [...document.querySelectorAll('main section')];
+for (const a of document.querySelectorAll('.pages a')) {
+  a.addEventListener('click', () => {
+    const here = sections.find((s) => s.getBoundingClientRect().bottom > window.innerHeight * 0.4);
+    if (here) a.hash = here.id;
+  });
 }

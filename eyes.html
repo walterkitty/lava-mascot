@@ -24,10 +24,6 @@
     <a href="#states"><span>02</span>Состояния</a>
     <a href="#moods"><span>03</span>Эмоции</a>
   </nav>
-  <div class="switch" role="group" aria-label="Шейдинг">
-    <button type="button" data-shading="fabric" aria-pressed="true">3D</button>
-    <button type="button" data-shading="flat" aria-pressed="false">2D</button>
-  </div>
 </aside>
 <main>
   <section class="top" id="top">
@@ -69,8 +65,8 @@
   </section>
 </main>
 <nav class="pages" aria-label="Варианты">
-  <a href="./" data-page="cat">Кот</a>
-  <a href="eyes.html" data-page="eyes">Глаза</a>
+  <div class="group"><span>Кот</span><a href="./" data-page="cat" data-d="3d">3D</a><a href="./?2d" data-page="cat" data-d="2d">2D</a></div>
+  <div class="group"><span>Глаза</span><a href="eyes.html" data-page="eyes" data-d="3d">3D</a><a href="eyes.html?2d" data-page="eyes" data-d="2d">2D</a></div>
 </nav>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
