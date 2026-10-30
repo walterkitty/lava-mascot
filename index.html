@@ -91,7 +91,6 @@ main { margin-left: var(--side); }
 section { padding: 96px 0; scroll-margin-top: 0; }
 section + section { border-top: 1px solid var(--border); }
 
-.eyebrow { font-size: 14px; font-weight: 500; color: var(--muted-foreground); }
 h1 {
   margin: 0;
   font-size: clamp(48px, 7vw, 80px);
@@ -107,11 +106,9 @@ h2 {
   letter-spacing: -0.03em;
   line-height: 1.05;
 }
-.lede { margin: 0; font-size: 18px; line-height: 1.55; color: var(--muted-foreground); text-wrap: pretty; max-width: 40ch; }
-.edition { font-size: 14px; color: var(--faint); font-variant-numeric: tabular-nums; }
 
 .top { padding-top: 72px; }
-.top-head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; }
+.top-head { display: grid; gap: 32px; }
 .top-head > div { display: flex; flex-direction: column; gap: 16px; }
 .head { display: flex; flex-direction: column; gap: 16px; max-width: 640px; }
 
@@ -151,9 +148,9 @@ h2 {
 .phone-mascot::before {
   content: "";
   position: absolute;
-  inset: -8%;
+  inset: -30%;
   border-radius: 50%;
-  background: var(--secondary);
+  background: radial-gradient(closest-side, rgba(250, 250, 250, 0.11), rgba(250, 250, 250, 0.04) 55%, rgba(250, 250, 250, 0) 100%);
   pointer-events: none;
 }
 .phone-mascot > * { position: relative; }
@@ -214,7 +211,6 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
   .wrap { padding: 0 16px; }
   section { padding: 64px 0; }
   .top { padding-top: 40px; }
-  .top-head { grid-template-columns: 1fr; gap: 16px; }
   .tile.wide { aspect-ratio: 4 / 5; margin-top: 32px; padding-top: 8%; }
   .phone { width: 74%; }
 }
@@ -247,12 +243,7 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
     <div class="wrap">
       <div class="top-head">
         <div>
-          <span class="eyebrow">Lava · ассистент</span>
-          <h1>Маскот ассистента</h1>
-        </div>
-        <div>
-          <p class="lede">Чёрный плюш, уши наружу. Глаза: веко, светящаяся радужка, зрачок под веком.</p>
-          <span class="edition">Октябрь 2026</span>
+          <h1>Lava assistant</h1>
         </div>
       </div>
       <div class="tile wide">
