@@ -213,3 +213,5 @@ nav.pages.more-left.more-right { -webkit-mask-image: linear-gradient(90deg, tran
   .next-link { flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; }
 }
 
+
+.icon-box.ember { background: linear-gradient(160deg, #ff6a2a, #e8420f); }
