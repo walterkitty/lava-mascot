@@ -3,7 +3,8 @@ const Mascot = window.LavaMascot[kit];
 const tunings = {
   lava: { round: 20.5, pupil: 1.05, eyeSize: 1.2, brows: 'hidden' },
   drop: { type: 'drop', eyes: 'cartoon', color: '#ffc23a', gradient: ['#F2A231', '#FBDA49', '#FFF9F1'], finish: 'frosted', solid: 'smooth' },
-  icon: { type: 'cloud', eyes: 'cartoon', brows: 'hidden', cheeks: 'hidden', faceY: 50, color: '#3a3e46', saturation: 1, brightness: 1, solid: 'smooth', box: true },
+  cloud: { type: 'cloud', eyes: 'cartoon', brows: 'hidden', cheeks: 'hidden', faceY: 50, color: '#3a3e46', saturation: 1, brightness: 1, solid: 'smooth', box: 1.9 },
+  icon: { type: 'cloud', body: 'hidden', eyes: 'ringed', ink: '#ffc400', faceY: 46, solid: 'smooth', box: 1.8 },
   flame: { path: 'M50 90C27 90 13 77 13 58C13 45 18 35 22 24C27 31 31 35 35 37C38 24 44 14 52 6C58 16 63 26 64 36C70 33 75 28 80 22C85 34 87 46 87 58C87 77 73 90 50 90Z', partsPath: 'M36 82H46A4 4 0 0 1 50 86V94A4 4 0 0 1 46 98H36A4 4 0 0 1 32 94V86A4 4 0 0 1 36 82ZM54 82H64A4 4 0 0 1 68 86V94A4 4 0 0 1 64 98H54A4 4 0 0 1 50 94V86A4 4 0 0 1 54 82Z', color: '#ff5a36', eyes: 'solid', ink: '#1d1a2e', faceScale: 0.42, faceY: 54 },
 };
 const { solid = 'fabric', scale = 1, box: boxed = false, ...tuned } = tunings[document.body.dataset.page] || {};
@@ -25,7 +26,7 @@ function render() {
       state: el.dataset.state || 'default',
       mood: el.dataset.mood || 'angry',
       shading,
-      body: document.body.dataset.body || 'shown',
+      body: document.body.dataset.body || tuned.body || 'shown',
       theme: el.dataset.theme || 'light',
       resolution: 2,
       paused: !seen,
@@ -33,7 +34,7 @@ function render() {
       style: { width: size, height: size },
     };
     root.render(boxed
-      ? h('div', { className: 'icon-box', style: { width: size, height: size } }, h(Mascot, { ...props, size: Math.round(size * 1.9), style: { width: Math.round(size * 1.9), height: Math.round(size * 1.9) } }))
+      ? h('div', { className: 'icon-box', style: { width: size, height: size } }, h(Mascot, { ...props, size: Math.round(size * boxed), style: { width: Math.round(size * boxed), height: Math.round(size * boxed) } }))
       : h(Mascot, props));
   }
 }
