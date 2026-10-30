@@ -1,4 +1,6 @@
-const { Assistant } = window.LavaMascot;
+const kit = document.body.dataset.kit || 'Assistant';
+const Mascot = window.LavaMascot[kit];
+const tuned = { Lava: { round: 20.5, pupil: 1.05, eyeSize: 1.2, brows: 'hidden' } }[kit] || {};
 const h = React.createElement;
 
 const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({ el, root: ReactDOM.createRoot(el) }));
@@ -11,7 +13,8 @@ function render() {
     const box = el.getBoundingClientRect();
     const eyesOnly = document.body.dataset.body === 'hidden';
     const size = Math.round(Math.min(box.width, box.height) * (el.dataset.mascot === 'phone' ? 1.3 : 0.72) * (eyesOnly ? 1.7 : 1));
-    root.render(h(Assistant, {
+    root.render(h(Mascot, {
+      ...tuned,
       size,
       state: el.dataset.state || 'default',
       mood: el.dataset.mood || 'angry',

@@ -218,3 +218,9 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
 
 [data-body="hidden"] .grid .tile { background: var(--card); }
 [data-body="hidden"] .phone-mascot::before { content: none; }
+@media (max-width: 640px) {
+  .pages { border-radius: 20px; max-width: calc(100vw - 32px); }
+  .pages .group { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .pages span { grid-column: 1 / -1; padding: 4px 0 2px; text-align: center; font-size: 12px; }
+  .pages a { padding: 8px 10px; text-align: center; font-size: 13px; }
+}
