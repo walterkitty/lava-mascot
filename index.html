@@ -88,8 +88,8 @@ h2 {
   <section id="moods">
     <h2>Эмоции</h2>
     <div class="states pair">
-      <div class="state"><div class="mascot" data-mascot="mood" data-mood="bored"></div><b>Скука</b></div>
       <div class="state"><div class="mascot" data-mascot="mood" data-mood="angry"></div><b>Злость</b></div>
+      <div class="state"><div class="mascot" data-mascot="mood" data-mood="bored"></div><b>Скука</b></div>
     </div>
   </section>
 </main>
@@ -115,7 +115,7 @@ function render() {
   for (const { el, root } of mounts) {
     const size = Math.round(sizes[el.dataset.mascot]());
     const state = el.dataset.state || 'default';
-    const mood = el.dataset.mood || 'bored';
+    const mood = el.dataset.mood || 'angry';
     root.render(h(Assistant, { size, state, mood, theme: 'light', resolution: 3, style: { width: size, height: size } }));
   }
 }
