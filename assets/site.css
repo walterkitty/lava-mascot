@@ -185,14 +185,19 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
   .grid { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
 }
 
-.pages {
+.dock {
   position: fixed;
   bottom: 20px;
   left: calc(50% + var(--side) / 2);
   transform: translateX(-50%);
   z-index: 30;
   display: flex;
-  gap: 4px;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+}
+.pages {
+  display: flex;
+  gap: 2px;
   padding: 4px;
   border-radius: 999px;
   background: rgba(30, 31, 31, 0.92);
@@ -200,27 +205,23 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
   backdrop-filter: blur(12px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
-.pages .group { display: flex; align-items: center; gap: 2px; }
-.pages .group + .group { padding-left: 4px; border-left: 1px solid var(--border); }
-.pages span { padding: 0 8px 0 12px; font-size: 14px; font-weight: 600; color: var(--foreground); }
-.pages a {
-  padding: 10px 14px;
+.pages a, .pages button {
+  padding: 10px 16px;
+  border: 0;
   border-radius: 999px;
+  background: none;
   font-size: 14px;
   font-weight: 600;
   color: var(--muted-foreground);
+  white-space: nowrap;
+  cursor: pointer;
 }
-.pages a:hover { color: var(--foreground); }
-.pages a[aria-current="page"] { background: var(--primary); color: var(--primary-foreground); }
+.pages a:hover, .pages button:hover { color: var(--foreground); }
+.pages a[aria-current="page"], .pages button[aria-pressed="true"] { background: var(--primary); color: var(--primary-foreground); }
 @media (max-width: 1023px) {
-  .pages { left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); }
+  .dock { left: 50%; bottom: max(16px, env(safe-area-inset-bottom)); }
 }
-
-[data-body="hidden"] .grid .tile { background: var(--card); }
-[data-body="hidden"] .phone-mascot::before { content: none; }
-@media (max-width: 640px) {
-  .pages { border-radius: 20px; max-width: calc(100vw - 32px); }
-  .pages .group { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-  .pages span { grid-column: 1 / -1; padding: 4px 0 2px; text-align: center; font-size: 12px; }
-  .pages a { padding: 8px 10px; text-align: center; font-size: 13px; }
+@media (max-width: 480px) {
+  .dock { gap: 6px; }
+  .pages a, .pages button { padding: 9px 10px; font-size: 13px; }
 }

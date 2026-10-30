@@ -5,8 +5,8 @@ const h = React.createElement;
 
 const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({ el, root: ReactDOM.createRoot(el) }));
 
-const flat = new URLSearchParams(location.search).has('2d');
-const shading = flat ? 'flat' : 'fabric';
+let flat = new URLSearchParams(location.search).has('2d');
+let shading = flat ? 'flat' : 'fabric';
 
 function render() {
   for (const { el, root } of mounts) {
@@ -48,9 +48,6 @@ const spy = new IntersectionObserver((entries) => {
 }, { rootMargin: '-45% 0px -50% 0px' });
 for (const s of document.querySelectorAll('main section')) spy.observe(s);
 
-for (const a of document.querySelectorAll('.pages a')) {
-  if (a.dataset.page === document.body.dataset.page && a.dataset.d === (flat ? '2d' : '3d')) a.setAttribute('aria-current', 'page');
-}
 
 const sections = [...document.querySelectorAll('main section')];
 for (const a of document.querySelectorAll('.pages a')) {
@@ -59,3 +56,17 @@ for (const a of document.querySelectorAll('.pages a')) {
     if (here) a.hash = here.id;
   });
 }
+
+const pageLinks = [...document.querySelectorAll('.pages a')];
+const modes = [...document.querySelectorAll('.switch button')];
+function setFlat(next) {
+  flat = next;
+  shading = flat ? 'flat' : 'fabric';
+  for (const b of modes) b.setAttribute('aria-pressed', String(b.dataset.d === (flat ? '2d' : '3d')));
+  for (const a of pageLinks) a.search = flat ? '?2d' : '';
+  history.replaceState(null, '', (flat ? '?2d' : location.pathname) + location.hash);
+  render();
+}
+for (const a of pageLinks) if (a.dataset.page === document.body.dataset.page) a.setAttribute('aria-current', 'page');
+for (const b of modes) b.addEventListener('click', () => setFlat(b.dataset.d === '2d'));
+setFlat(flat);
