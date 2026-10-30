@@ -65,3 +65,24 @@ const watch = new IntersectionObserver((entries) => {
   render();
 }, { rootMargin: '200px 0px' });
 for (const { el } of mounts) watch.observe(el);
+
+const order = [...document.querySelectorAll('nav.pages a')];
+const here = order.findIndex((a) => a.dataset.page === document.body.dataset.page);
+if (here >= 0) {
+  const next = order[(here + 1) % order.length];
+  const section = document.createElement('section');
+  section.className = 'next';
+  section.innerHTML = `<div class="wrap"><a class="next-link" href="${next.getAttribute('href')}"><span>Следующий вариант</span><b>${next.textContent} →</b></a></div>`;
+  document.querySelector('main').append(section);
+}
+
+const strip = document.querySelector('nav.pages');
+function edges() {
+  strip.classList.toggle('more-left', strip.scrollLeft > 2);
+  strip.classList.toggle('more-right', strip.scrollLeft + strip.clientWidth < strip.scrollWidth - 2);
+}
+const current = strip.querySelector('[aria-current="page"]');
+if (current) strip.scrollLeft = current.offsetLeft - (strip.clientWidth - current.offsetWidth) / 2;
+strip.addEventListener('scroll', edges, { passive: true });
+window.addEventListener('resize', edges);
+edges();
