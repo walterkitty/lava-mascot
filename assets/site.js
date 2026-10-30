@@ -1,12 +1,16 @@
 const kit = document.body.dataset.kit || 'Assistant';
 const Mascot = window.LavaMascot[kit];
-const tuned = { Lava: { round: 20.5, pupil: 1.05, eyeSize: 1.2, brows: 'hidden' } }[kit] || {};
+const tunings = {
+  lava: { round: 20.5, pupil: 1.05, eyeSize: 1.2, brows: 'hidden' },
+  drop: { type: 'drop', eyes: 'cartoon', color: '#ffc23a', gradient: ['#F2A231', '#FBDA49', '#FFF9F1'], solid: 'plastic' },
+};
+const { solid = 'fabric', ...tuned } = tunings[document.body.dataset.page] || {};
 const h = React.createElement;
 
 const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({ el, root: ReactDOM.createRoot(el) }));
 
 let flat = new URLSearchParams(location.search).has('2d');
-let shading = flat ? 'flat' : 'fabric';
+let shading = flat ? 'flat' : solid;
 
 function render() {
   for (const { el, root } of mounts) {
@@ -30,23 +34,6 @@ function render() {
 render();
 new ResizeObserver(render).observe(document.querySelector('main'));
 
-const side = document.querySelector('.side');
-const burger = document.querySelector('.burger');
-function toggleMenu(open) {
-  side.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', String(open));
-}
-burger.addEventListener('click', () => toggleMenu(!side.classList.contains('open')));
-for (const a of side.querySelectorAll('a')) a.addEventListener('click', () => toggleMenu(false));
-
-const links = [...document.querySelectorAll('.links a')];
-const spy = new IntersectionObserver((entries) => {
-  for (const e of entries) {
-    if (!e.isIntersecting) continue;
-    for (const a of links) a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + e.target.id));
-  }
-}, { rootMargin: '-45% 0px -50% 0px' });
-for (const s of document.querySelectorAll('main section')) spy.observe(s);
 
 
 const sections = [...document.querySelectorAll('main section')];
@@ -61,7 +48,7 @@ const pageLinks = [...document.querySelectorAll('.pages a')];
 const modes = [...document.querySelectorAll('.switch button')];
 function setFlat(next) {
   flat = next;
-  shading = flat ? 'flat' : 'fabric';
+  shading = flat ? 'flat' : solid;
   for (const b of modes) b.setAttribute('aria-pressed', String(b.dataset.d === (flat ? '2d' : '3d')));
   history.replaceState(null, '', (flat ? '?2d' : location.pathname) + location.hash);
   render();
