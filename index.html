@@ -62,10 +62,11 @@ h2 {
   width: 100%;
   max-width: 960px;
 }
+.states.pair { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
 .state { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .state b { font-size: 18px; font-weight: 700; }
 @media (max-width: 640px) {
-  .states { grid-template-columns: 1fr; gap: 40px; }
+  .states, .states.pair { grid-template-columns: 1fr; gap: 40px; }
 }
 </style>
 </head>
@@ -84,6 +85,13 @@ h2 {
       <div class="state"><div class="mascot" data-mascot="state" data-state="sleeping"></div><b>Сон</b></div>
     </div>
   </section>
+  <section id="moods">
+    <h2>Эмоции</h2>
+    <div class="states pair">
+      <div class="state"><div class="mascot" data-mascot="mood" data-mood="bored"></div><b>Скука</b></div>
+      <div class="state"><div class="mascot" data-mascot="mood" data-mood="angry"></div><b>Злость</b></div>
+    </div>
+  </section>
 </main>
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
@@ -95,6 +103,7 @@ const h = React.createElement;
 const sizes = {
   hero: () => Math.min(360, window.innerWidth * 0.72),
   state: () => window.innerWidth <= 640 ? Math.min(240, window.innerWidth * 0.6) : Math.min(240, window.innerWidth * 0.24),
+  mood: () => window.innerWidth <= 640 ? Math.min(240, window.innerWidth * 0.6) : Math.min(280, window.innerWidth * 0.3),
 };
 
 const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({
@@ -106,7 +115,8 @@ function render() {
   for (const { el, root } of mounts) {
     const size = Math.round(sizes[el.dataset.mascot]());
     const state = el.dataset.state || 'default';
-    root.render(h(Assistant, { size, state, theme: 'light', resolution: 3, style: { width: size, height: size } }));
+    const mood = el.dataset.mood || 'bored';
+    root.render(h(Assistant, { size, state, mood, theme: 'light', resolution: 3, style: { width: size, height: size } }));
   }
 }
 render();
