@@ -175,5 +175,13 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
 nav.pages { overflow-x: auto; scrollbar-width: none; max-width: calc(100vw - 150px); }
 nav.pages::-webkit-scrollbar { display: none; }
 @media (max-width: 480px) {
-  nav.pages { max-width: calc(100vw - 32px); }
+  nav.pages {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: calc(100vw - 32px);
+    border-radius: 22px;
+    overflow: visible;
+  }
+  nav.pages a { text-align: center; }
+  main { padding-bottom: 170px; }
 }
