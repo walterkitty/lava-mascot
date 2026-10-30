@@ -236,3 +236,4 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
 }
 
 [data-body="hidden"] .grid .tile { background: var(--card); }
+[data-body="hidden"] .phone-mascot::before { content: none; }
