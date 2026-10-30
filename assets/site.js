@@ -36,13 +36,6 @@ new ResizeObserver(render).observe(document.querySelector('main'));
 
 
 
-const sections = [...document.querySelectorAll('main section')];
-for (const a of document.querySelectorAll('.pages a')) {
-  a.addEventListener('click', () => {
-    const here = sections.find((s) => s.getBoundingClientRect().bottom > window.innerHeight * 0.4);
-    if (here) a.hash = here.id;
-  });
-}
 
 const pageLinks = [...document.querySelectorAll('.pages a')];
 const modes = [...document.querySelectorAll('.switch button')];
