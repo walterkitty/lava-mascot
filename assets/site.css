@@ -225,3 +225,5 @@ figcaption span { font-size: 14px; color: var(--muted-foreground); }
   .dock { gap: 6px; }
   .pages a, .pages button { padding: 9px 10px; font-size: 13px; }
 }
+[data-body="hidden"] .grid .tile { background: var(--card); }
+[data-body="hidden"] .phone-mascot::before { content: none; }
