@@ -6,6 +6,7 @@ const tunings = {
   cloud: { type: 'cloud', eyes: 'cartoon', brows: 'hidden', cheeks: 'hidden', faceY: 50, color: '#3a3e46', saturation: 1, brightness: 1, solid: 'smooth', box: 1.9 },
   icon: { type: 'cloud', body: 'hidden', eyes: 'ringed', ink: '#ffc400', faceY: 46, solid: 'smooth', box: 1.8, strain: true, turn: 0, jumpSpin: 0 },
   eye: { path: 'M50 94C26 94 12 80 12 60C12 48 15 40 18 30C21 36 24 40 28 42C28 30 31 20 36 12C39 22 42 30 46 34C47 22 51 12 56 4C60 16 62 26 62 34C66 28 70 24 74 18C77 28 78 36 77 42C81 38 84 34 87 30C89 42 88 52 88 60C88 80 74 94 50 94Z', eyes: 'lidded', eyeCount: 1, ink: '#f04a14', color: '#131317', saturation: 1, brightness: 0.6, faceY: 62, faceScale: 1, pupil: 1.9, turn: 0.2 },
+  duck: { path: 'M50 93C25 93 9 79 9 58C9 38 25 22 45 21C45 15 48 10 54 7C52 12 52 16 54 20C75 23 89 39 89 57C89 68 86 75 93 80C87 88 72 93 50 93Z', eyes: 'ringed', ink: '#ffffff', mouth: 'grin', color: '#ffd23f', saturation: 1.6, brightness: 1.15, faceY: 52, faceScale: 0.9, solid: 'smooth' },
   flame: { path: 'M50 90C27 90 13 77 13 58C13 45 18 35 22 24C27 31 31 35 35 37C38 24 44 14 52 6C58 16 63 26 64 36C70 33 75 28 80 22C85 34 87 46 87 58C87 77 73 90 50 90Z', partsPath: 'M36 82H46A4 4 0 0 1 50 86V94A4 4 0 0 1 46 98H36A4 4 0 0 1 32 94V86A4 4 0 0 1 36 82ZM54 82H64A4 4 0 0 1 68 86V94A4 4 0 0 1 64 98H54A4 4 0 0 1 50 94V86A4 4 0 0 1 54 82Z', color: '#ff5a36', eyes: 'solid', ink: '#1d1a2e', faceScale: 0.42, faceY: 54 },
 };
 const { solid = 'fabric', scale = 1, box: boxed = false, strain = false, ...tuned } = tunings[document.body.dataset.page] || {};

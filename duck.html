@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Маскот ассистента · утка</title>
+<meta name="description" content="Маскот ассистента Lava: состояния и эмоции.">
+<link rel="icon" href="assets/avalava-mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-page="duck" data-kit="BotAvatar" data-ground="dark">
+<main>
+  <section class="top" id="top">
+    <div class="wrap">
+      <div class="top-head">
+        <div>
+          <h1>Lava assistant</h1>
+        </div>
+      </div>
+      <div class="tile wide">
+        <div class="phone">
+          <img src="assets/img/assistant-new-chat.jpg" alt="Ассистент на телефоне: новый чат">
+          <div class="phone-mascot" data-mascot="phone" data-theme="dark"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="states">
+    <div class="wrap">
+      <div class="head"><h2>Состояния</h2></div>
+      <div class="grid">
+        <figure><div class="tile" data-mascot="tile" data-state="default"></div><figcaption><b>Покой</b><span>default</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-state="working"></div><figcaption><b>Работа</b><span>working</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-state="sleeping"></div><figcaption><b>Сон</b><span>sleeping</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="moods">
+    <div class="wrap">
+      <div class="head"><h2>Эмоции</h2></div>
+      <div class="grid">
+        <figure><div class="tile" data-mascot="tile" data-mood="angry"></div><figcaption><b>Злость<i class="tag">основная</i></b><span>angry</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-mood="bored"></div><figcaption><b>Скука</b><span>bored</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-mood="happy"></div><figcaption><b>Радость</b><span>happy</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="dock">
+  <nav class="pages" aria-label="Варианты">
+    <a href="./" data-page="cat">Кот</a>
+    <a href="eyes.html" data-page="eyes">Глаза</a>
+    <a href="lava.html" data-page="lava">Треугольник</a>
+    <a href="drop.html" data-page="drop">Капля</a>
+    <a href="icon.html" data-page="icon">Иконка</a>
+    <a href="cloud.html" data-page="cloud">Туча</a>
+    <a href="flame.html" data-page="flame">Огонёк</a>
+    <a href="eye.html" data-page="eye">Глаз</a>
+    <a href="duck.html" data-page="duck">Утка</a>
+  </nav>
+  <div class="pages switch" role="group" aria-label="Шейдинг">
+    <button type="button" data-d="3d">3D</button>
+    <button type="button" data-d="2d">2D</button>
+  </div>
+</div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="assets/lava-mascot.js"></script>
+<script src="assets/site.js"></script>
+</body>
+</html>
