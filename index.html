@@ -4,92 +4,247 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Маскот ассистента</title>
+<meta name="description" content="Маскот ассистента Lava: состояния и эмоции.">
 <link rel="icon" href="assets/avalava-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
 :root {
+  --background: #141515;
+  --foreground: #ffffff;
+  --card: #1e1f1f;
+  --secondary: #2b2c2c;
+  --border: #323434;
+  --muted-foreground: #9aa1b1;
+  --faint: #787d7d;
+  --primary: #fafafa;
+  --primary-foreground: #141515;
   --ground: #ff6a13;
-  --fg: #141414;
-  --muted: rgba(20, 20, 20, 0.64);
+  --radius: 10px;
+  --side: 248px;
 }
 * { box-sizing: border-box; }
-html { scroll-snap-type: y proximity; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  background: var(--ground);
-  color: var(--fg);
+  background: var(--background);
+  color: var(--foreground);
   font-family: Manrope, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-section {
-  min-height: 100svh;
-  padding: 56px 16px;
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+
+.side {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--side);
+  padding: 24px 16px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  scroll-snap-align: start;
+  gap: 32px;
+  border-right: 1px solid var(--border);
+  background: var(--background);
+  z-index: 10;
 }
-.hero { gap: 32px; text-align: center; }
-.hero h1 {
-  margin: 0;
-  font-size: clamp(40px, 8vw, 88px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-}
-.hero p {
-  margin: 0;
-  max-width: 34ch;
-  font-size: clamp(16px, 2vw, 20px);
+.brand { display: flex; align-items: center; gap: 10px; padding: 0 8px; font-weight: 600; }
+.brand img { width: 22px; height: 22px; }
+.brand small { font-size: 13px; font-weight: 500; color: var(--muted-foreground); }
+.links { display: flex; flex-direction: column; gap: 2px; }
+.links a {
+  display: flex;
+  gap: 12px;
+  padding: 9px 8px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 1.4;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
-.mascot { display: grid; place-items: center; cursor: pointer; }
-h2 {
-  margin: 0 0 48px;
-  font-size: clamp(32px, 5vw, 56px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-align: center;
-}
-.states {
+.links a:hover, .links a[aria-current="true"] { color: var(--foreground); background: var(--card); }
+.links a span { color: var(--faint); font-variant-numeric: tabular-nums; }
+.switch {
+  margin-top: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(16px, 4vw, 48px);
-  width: 100%;
-  max-width: 960px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
 }
-.states.pair { grid-template-columns: repeat(2, 1fr); max-width: 640px; }
-.state { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-.state b { font-size: 18px; font-weight: 700; }
+.switch button {
+  padding: 8px 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  cursor: pointer;
+}
+.switch button[aria-pressed="true"] { background: var(--primary); color: var(--primary-foreground); }
+.topbar { display: none; }
+.burger { display: none; }
+
+main { margin-left: var(--side); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+section { padding: 96px 0; scroll-margin-top: 0; }
+section + section { border-top: 1px solid var(--border); }
+
+.eyebrow { font-size: 14px; font-weight: 500; color: var(--muted-foreground); }
+h1 {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+h2 {
+  margin: 0;
+  font-size: clamp(36px, 4.5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.lede { margin: 0; font-size: 18px; line-height: 1.55; color: var(--muted-foreground); text-wrap: pretty; max-width: 40ch; }
+.edition { font-size: 14px; color: var(--faint); font-variant-numeric: tabular-nums; }
+
+.top { padding-top: 72px; }
+.top-head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; }
+.top-head > div { display: flex; flex-direction: column; gap: 16px; }
+.head { display: flex; flex-direction: column; gap: 16px; max-width: 640px; }
+
+.tile {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--ground);
+  overflow: hidden;
+  cursor: pointer;
+}
+.tile.wide { aspect-ratio: 16 / 9; margin-top: 56px; }
+.grid { margin-top: 48px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+figure { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+figcaption { display: flex; flex-direction: column; gap: 2px; }
+figcaption b { font-size: 15px; font-weight: 600; }
+figcaption span { font-size: 14px; color: var(--muted-foreground); }
+.tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--secondary);
+  font-size: 12px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--foreground);
+  vertical-align: 2px;
+}
+
+@media (max-width: 1023px) {
+  .side {
+    position: fixed;
+    inset: 0;
+    width: auto;
+    border: 0;
+    display: none;
+    padding: 72px 16px 24px;
+  }
+  .side.open { display: flex; }
+  .side .brand { display: none; }
+  .switch { margin-top: 0; }
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    padding: 0 16px;
+    background: var(--background);
+    border-bottom: 1px solid var(--border);
+  }
+  .burger {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--card);
+    cursor: pointer;
+  }
+  .burger svg { width: 20px; height: 20px; }
+  main { margin-left: 0; }
+  .wrap { padding: 0 16px; }
+  section { padding: 64px 0; }
+  .top { padding-top: 40px; }
+  .top-head { grid-template-columns: 1fr; gap: 16px; }
+  .tile.wide { aspect-ratio: 1; margin-top: 32px; }
+}
 @media (max-width: 640px) {
-  .states, .states.pair { grid-template-columns: 1fr; gap: 40px; }
+  .grid { grid-template-columns: 1fr; gap: 24px; margin-top: 32px; }
 }
 </style>
 </head>
 <body>
+<header class="topbar">
+  <a class="brand" href="#top"><img src="assets/avalava-mark.svg" alt=""><span>Маскот</span></a>
+  <button type="button" class="burger" aria-label="Меню" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</header>
+<aside class="side">
+  <a class="brand" href="#top"><img src="assets/avalava-mark.svg" alt=""><span>Lava</span><small>Маскот</small></a>
+  <nav class="links">
+    <a href="#top"><span>01</span>Маскот</a>
+    <a href="#states"><span>02</span>Состояния</a>
+    <a href="#moods"><span>03</span>Эмоции</a>
+  </nav>
+  <div class="switch" role="group" aria-label="Шейдинг">
+    <button type="button" data-shading="fabric" aria-pressed="true">3D</button>
+    <button type="button" data-shading="flat" aria-pressed="false">2D</button>
+  </div>
+</aside>
 <main>
-  <section class="hero" id="hero">
-    <div class="mascot" data-mascot="hero"></div>
-    <h1>Маскот<br>ассистента</h1>
-    <p>Чёрный плюш, уши наружу. Глаза: веко, светящаяся радужка, зрачок под веком.</p>
-  </section>
-  <section id="states">
-    <h2>Состояния</h2>
-    <div class="states">
-      <div class="state"><div class="mascot" data-mascot="state" data-state="default"></div><b>Покой</b></div>
-      <div class="state"><div class="mascot" data-mascot="state" data-state="working"></div><b>Работа</b></div>
-      <div class="state"><div class="mascot" data-mascot="state" data-state="sleeping"></div><b>Сон</b></div>
+  <section class="top" id="top">
+    <div class="wrap">
+      <div class="top-head">
+        <div>
+          <span class="eyebrow">Lava · ассистент</span>
+          <h1>Маскот ассистента</h1>
+        </div>
+        <div>
+          <p class="lede">Чёрный плюш, уши наружу. Глаза: веко, светящаяся радужка, зрачок под веком.</p>
+          <span class="edition">Октябрь 2026</span>
+        </div>
+      </div>
+      <div class="tile wide" data-mascot="hero"></div>
     </div>
   </section>
+
+  <section id="states">
+    <div class="wrap">
+      <div class="head"><h2>Состояния</h2></div>
+      <div class="grid">
+        <figure><div class="tile" data-mascot="tile" data-state="default"></div><figcaption><b>Покой</b><span>default</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-state="working"></div><figcaption><b>Работа</b><span>working</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-state="sleeping"></div><figcaption><b>Сон</b><span>sleeping</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
   <section id="moods">
-    <h2>Эмоции</h2>
-    <div class="states pair">
-      <div class="state"><div class="mascot" data-mascot="mood" data-mood="angry"></div><b>Злость</b></div>
-      <div class="state"><div class="mascot" data-mascot="mood" data-mood="bored"></div><b>Скука</b></div>
+    <div class="wrap">
+      <div class="head"><h2>Эмоции</h2></div>
+      <div class="grid">
+        <figure><div class="tile" data-mascot="tile" data-mood="angry"></div><figcaption><b>Злость<i class="tag">основная</i></b><span>Веко скошено к переносице, зрачок смотрит прямо.</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-mood="bored"></div><figcaption><b>Скука</b><span>bored</span></figcaption></figure>
+        <figure><div class="tile" data-mascot="tile" data-mood="happy"></div><figcaption><b>Радость</b><span>happy</span></figcaption></figure>
+      </div>
     </div>
   </section>
 </main>
@@ -100,27 +255,55 @@ h2 {
 const { Assistant } = window.LavaMascot;
 const h = React.createElement;
 
-const sizes = {
-  hero: () => Math.min(360, window.innerWidth * 0.72),
-  state: () => window.innerWidth <= 640 ? Math.min(240, window.innerWidth * 0.6) : Math.min(240, window.innerWidth * 0.24),
-  mood: () => window.innerWidth <= 640 ? Math.min(240, window.innerWidth * 0.6) : Math.min(280, window.innerWidth * 0.3),
-};
+const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({ el, root: ReactDOM.createRoot(el) }));
 
-const mounts = [...document.querySelectorAll('[data-mascot]')].map((el) => ({
-  el,
-  root: ReactDOM.createRoot(el),
-}));
+let shading = 'fabric';
+try { if (localStorage.getItem('shading') === 'flat') shading = 'flat'; } catch {}
 
 function render() {
   for (const { el, root } of mounts) {
-    const size = Math.round(sizes[el.dataset.mascot]());
-    const state = el.dataset.state || 'default';
-    const mood = el.dataset.mood || 'angry';
-    root.render(h(Assistant, { size, state, mood, theme: 'light', resolution: 3, style: { width: size, height: size } }));
+    const box = el.getBoundingClientRect();
+    const size = Math.round(Math.min(box.width, box.height) * (el.dataset.mascot === 'hero' ? 0.62 : 0.72));
+    root.render(h(Assistant, {
+      size,
+      state: el.dataset.state || 'default',
+      mood: el.dataset.mood || 'angry',
+      shading,
+      theme: 'light',
+      resolution: 3,
+      style: { width: size, height: size },
+    }));
   }
 }
-render();
-window.addEventListener('resize', render);
+
+const switches = [...document.querySelectorAll('[data-shading]')];
+function setShading(next) {
+  shading = next;
+  for (const b of switches) b.setAttribute('aria-pressed', String(b.dataset.shading === shading));
+  try { localStorage.setItem('shading', shading); } catch {}
+  render();
+}
+for (const b of switches) b.addEventListener('click', () => setShading(b.dataset.shading));
+setShading(shading);
+new ResizeObserver(render).observe(document.querySelector('main'));
+
+const side = document.querySelector('.side');
+const burger = document.querySelector('.burger');
+function toggleMenu(open) {
+  side.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+}
+burger.addEventListener('click', () => toggleMenu(!side.classList.contains('open')));
+for (const a of side.querySelectorAll('a')) a.addEventListener('click', () => toggleMenu(false));
+
+const links = [...document.querySelectorAll('.links a')];
+const spy = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    for (const a of links) a.setAttribute('aria-current', String(a.getAttribute('href') === '#' + e.target.id));
+  }
+}, { rootMargin: '-45% 0px -50% 0px' });
+for (const s of document.querySelectorAll('main section')) spy.observe(s);
 </script>
 </body>
 </html>
